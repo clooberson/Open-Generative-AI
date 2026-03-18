@@ -22,6 +22,7 @@
     "directories": {
       "output": "release"
     },
+    "afterPack": "./afterPack.js",
     "files": [
       "dist/**/*",
       "electron/**/*"
@@ -29,6 +30,7 @@
     "mac": {
       "category": "public.app-category.graphics-design",
       "icon": "public/banner.png",
+      "gatekeeperAssess": false,
       "target": [
         {
           "target": "dmg",
