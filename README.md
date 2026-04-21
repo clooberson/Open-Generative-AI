@@ -127,6 +127,7 @@ For a deep dive into the technical architecture and the philosophy behind the "I
 - **Video Studio** — Generate videos from text prompts (40+ text-to-video models) or animate a start-frame image (60+ image-to-video models). Same intelligent mode switching as Image Studio.
 - **Lip Sync Studio** — Animate portrait images or sync lips on existing videos using audio. 9 dedicated models across two modes: portrait image + audio → talking video, and video + audio → lipsync video.
 - **Cinema Studio** — Interface for photorealistic cinematic shots with pro camera controls (Lens, Focal Length, Aperture)
+- **Workflow Studio** — Build and run multi-step AI pipelines visually. Chain image, video, and audio models into automated flows. Browse community templates, create your own with a node-based editor, and run them via an interactive playground.
 - **Upload History** — Reference images are uploaded once and stored locally. A picker panel lets you reuse any previously uploaded image across sessions — no re-uploading.
 - **Smart Controls** — Dynamic aspect ratio, resolution/quality, and duration pickers that adapt to each model's capabilities (including t2i models with resolution or quality options)
 - **Generation History** — Browse, revisit, and download all past generations (persisted in browser storage)
@@ -235,6 +236,20 @@ The **Lip Sync Studio** generates audio-driven talking videos using 9 models acr
 
 Generation history is saved separately in `lipsync_history` and pending jobs resume automatically on page reload.
 
+### 🔀 Workflow Studio
+
+The **Workflow Studio** lets you build and run multi-step AI pipelines without writing code.
+
+**Key capabilities:**
+- **Templates** — Start from pre-built workflows (image chains, video pipelines, and more)
+- **My Workflows** — Save and manage your own custom pipelines
+- **Community** — Browse and run workflows published by other users
+- **Node-based Builder** — Drag-and-drop visual editor to connect models and route outputs between steps
+- **Playground** — Run any workflow interactively with a form UI; results render inline
+- **API execution** — Every workflow is also callable via the Muapi API
+
+> 💡 **Want to add workflows to your own app?** Check out **[Vibe Workflow](https://github.com/SamurAIGPT/Vibe-Workflow)** — the open-source workflow engine powering this feature. Drop it into any project.
+
 ### 🎥 Cinema Studio Controls
 
 The **Cinema Studio** offers precise control over the virtual camera, translating your choices into optimized prompt modifiers:
@@ -325,14 +340,15 @@ Open-Generative-AI/
 ├── packages/
 │   └── studio/                 # Shared React component library
 │       └── src/
-│           ├── index.js        # Exports: ImageStudio, VideoStudio, LipSyncStudio, CinemaStudio
+│           ├── index.js        # Exports: ImageStudio, VideoStudio, LipSyncStudio, CinemaStudio, WorkflowStudio
 │           ├── models.js       # 200+ model definitions (single source of truth)
 │           ├── muapi.js        # API client (named exports, apiKey as first param)
 │           └── components/
 │               ├── ImageStudio.jsx    # Dual-mode t2i/i2i studio
 │               ├── VideoStudio.jsx    # Dual-mode t2v/i2v studio
 │               ├── LipSyncStudio.jsx  # Portrait/video + audio → talking video
-│               └── CinemaStudio.jsx   # Pro studio with camera controls
+│               ├── CinemaStudio.jsx   # Pro studio with camera controls
+│               └── WorkflowStudio.jsx # Multi-step pipeline builder & playground
 ├── next.config.mjs             # transpilePackages: ['studio']
 ├── tailwind.config.js
 └── package.json                # workspaces: ["packages/studio"]
