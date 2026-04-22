@@ -2,7 +2,7 @@
   "name": "open-generative-ai",
   "description": "Open-source alternative to Higgsfield AI — AI image, video, cinema and lip sync studio",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "workspaces": [
     "packages/studio",
     "packages/workflow-ui",
@@ -54,8 +54,7 @@
         {
           "target": "nsis",
           "arch": [
-            "x64",
-            "arm64"
+            "x64"
           ]
         }
       ]

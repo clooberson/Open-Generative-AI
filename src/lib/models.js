@@ -2162,7 +2162,7 @@ export const t2vModels = [
   },
   {
     "id": "seedance-v2.0-t2v",
-    "name": "Seedance 2.0",
+    "name": "SD 2",
     "inputs": {
       "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "The prompt to generate the video" },
       "aspect_ratio": { "enum": ["16:9", "9:16", "4:3", "3:4"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "Aspect ratio of the output video.", "default": "16:9" },
@@ -2172,10 +2172,10 @@ export const t2vModels = [
   },
   {
     "id": "seedance-v2.0-extend",
-    "name": "Seedance 2.0 Extend",
+    "name": "SD 2 Extend",
     "requiresRequestId": true,
     "inputs": {
-      "request_id": { "type": "string", "title": "Request ID", "name": "request_id", "description": "Request ID of the original Seedance 2.0 video generation.", "placeholder": "abcdefg-123-456-789-a1b2c3d4e5f6" },
+      "request_id": { "type": "string", "title": "Request ID", "name": "request_id", "description": "Request ID of the original SD 2 video generation.", "placeholder": "abcdefg-123-456-789-a1b2c3d4e5f6" },
       "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "Optional prompt to guide the extension. If omitted, the model continues with the original scene." },
       "duration": { "enum": [5, 10, 15], "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video extension in seconds", "default": 5 },
       "quality": { "enum": ["high", "basic"], "title": "Quality", "name": "quality", "type": "string", "description": "Quality of the generated video.", "default": "basic" }
@@ -7938,7 +7938,7 @@ export const i2vModels = [
   },
   {
     "id": "seedance-v2.0-i2v",
-    "name": "Seedance 2.0 I2V",
+    "name": "SD 2 I2V",
     "endpoint": "seedance-v2.0-i2v",
     "family": "seedance-v2.0",
     "imageField": "images_list",
