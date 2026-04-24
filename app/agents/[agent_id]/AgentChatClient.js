@@ -15,15 +15,22 @@ const STORAGE_KEY = "muapi_key";
  * IMPORTANT: StandaloneShell is NOT in the tree on /agents/* pages, so we
  * must set up our own axios interceptor here to inject the API key into
  * all requests made by the AiAgent library.
+ *
+ * Personal note: removed the console.log in render since it was spamming
+ * the browser console on every re-render. Keeping it behind a debug flag.
  */
 export default function AgentChatClient({ agentDetails, initialHistory, userData }) {
   const interceptorRef = useRef(null);
 
-  console.log("[AgentChatClient] Rendering", { 
-    hasAgentDetails: !!agentDetails, 
-    hasHistory: !!initialHistory, 
-    hasUserData: !!userData 
-  });
+  // Toggle this to true locally if you need to debug prop values
+  const DEBUG = false;
+  if (DEBUG) {
+    console.log("[AgentChatClient] Rendering", {
+      hasAgentDetails: !!agentDetails,
+      hasHistory: !!initialHistory,
+      hasUserData: !!userData,
+    });
+  }
 
   useEffect(() => {
     const getKey = () => {
