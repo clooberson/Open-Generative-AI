@@ -27,12 +27,16 @@ export default async function afterPack({ appOutDir, packager }) {
                 console.log(`  • removed foreign SWC binary  path=${fullPath}`);
             }
         }
+    } else {
+        // nextDir doesn't exist - likely next isn't unpacked, nothing to clean up
+        console.log(`  • skipping SWC cleanup, directory not found: ${nextDir}`);
     }
 
     if (platformName !== 'mac') return;
 
     const appPath = path.join(appOutDir, `${packager.appInfo.productName}.app`);
     console.log(`  • ad-hoc signing  path=${appPath}`);
-    execSync(`codesign --deep --force --sign - "${appPath}"`, { stdio: 'inherit' });
+    // using --options runtime so the signature is a bit more robust on newer macOS versions
+    execSync(`codesign --deep --force --options runtime --sign - "${appPath}"`, { stdio: 'inherit' });
     console.log(`  • ad-hoc signing complete`);
 }
