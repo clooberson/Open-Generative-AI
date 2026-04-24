@@ -18,6 +18,9 @@ const STORAGE_KEY = "muapi_key";
  *
  * Personal note: removed the console.log in render since it was spamming
  * the browser console on every re-render. Keeping it behind a debug flag.
+ *
+ * Personal note: changed the background from black to a dark gray (#0f0f0f)
+ * since pure black felt a bit harsh on my eyes during long sessions.
  */
 export default function AgentChatClient({ agentDetails, initialHistory, userData }) {
   const interceptorRef = useRef(null);
@@ -78,7 +81,8 @@ export default function AgentChatClient({ agentDetails, initialHistory, userData
   );
 
   return (
-    <div className="h-screen w-full bg-black">
+    // Using a slightly off-black bg instead of pure black — easier on the eyes
+    <div className="h-screen w-full" style={{ backgroundColor: "#0f0f0f" }}>
       <AiAgent
         initialAgentDetails={agentDetails}
         initialHistory={initialHistory}
