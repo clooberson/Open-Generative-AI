@@ -7,10 +7,15 @@ import AgentChatClient from "../AgentChatClient";
  * the client chat component with existing conversation messages pre-loaded.
  *
  * URL: /agents/[agent_id]/[conversation_id]
+ *
+ * Personal note: The slug length check (> 20) is a bit fragile — UUIDs are
+ * 36 chars so this works in practice, but worth revisiting if slugs ever
+ * get longer.
  */
 export async function generateMetadata({ params }) {
+  const { agent_id } = await params;
   return {
-    title: `Agent Chat — Open Generative AI`,
+    title: `Agent Chat (${agent_id}) — Open Generative AI`,
   };
 }
 
@@ -93,7 +98,10 @@ export default async function AgentConversationPage({ params }) {
   const cookieStore = await cookies();
   const apiKey = cookieStore.get("muapi_key")?.value;
 
-  console.log(`[ConvPage] Loading for agent: ${agent_id}, conv: ${conversation_id}, hasKey: ${!!apiKey}`);
+  // Only log in dev so we don't spam production logs
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[ConvPage] Loading for agent: ${agent_id}, conv: ${conversation_id}, hasKey: ${!!apiKey}`);
+  }
 
   const [agentDetails, initialHistory, userData] = await Promise.all([
     fetchAgentDetails(agent_id, apiKey),
