@@ -11,11 +11,14 @@ import AgentChatClient from "./AgentChatClient";
 export async function generateMetadata({ params }) {
   const { agent_id } = await params;
   return {
+    // TODO: fetch agent name here so title is more descriptive
     title: `Agent Chat — Open Generative AI`,
   };
 }
 
 const BASE_URL = 'https://api.muapi.ai';
+// Threshold for treating the agent_id param as a UUID vs a slug
+const UUID_LENGTH_THRESHOLD = 20;
 
 async function fetchAgentDetails(agentId, apiKey) {
   if (!apiKey) return null;
@@ -33,7 +36,7 @@ async function fetchAgentDetails(agentId, apiKey) {
     if (res.ok) return await res.json();
     
     // If by-slug fails, try fetching by direct ID (if it looks like a UUID)
-    if (agentId.length > 20) {
+    if (agentId.length > UUID_LENGTH_THRESHOLD) {
       console.log(`[AgentPage] Fetch by slug failed, trying by ID: ${agentId}`);
       const resId = await fetch(
         `${BASE_URL}/agents/${agentId}`,
