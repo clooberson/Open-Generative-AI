@@ -1,29 +1,27 @@
-import { cookies } from "next/headers";
 import AgentCreateClient from "./AgentCreateClient";
 
-const BASE_URL = 'https://api.muapi.ai';
+/**
+ * Server component for the agent creation page.
+ * Renders the client-side agent creation form.
+ */
+export const metadata = {
+  title: "Create Agent | Open Generative AI",
+  description: "Create a new AI agent with custom instructions and capabilities",
+};
 
-async function fetchUserData(apiKey) {
-  if (!apiKey) return null;
-  try {
-    const res = await fetch(`${BASE_URL}/api/v1/account/balance`, {
-      cache: "no-store",
-      headers: { "x-api-key": apiKey },
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
-
-export default async function CreateAgentPage() {
-  const cookieStore = await cookies();
-  const apiKey = cookieStore.get("muapi_key")?.value;
-
-  const userData = await fetchUserData(apiKey);
-
+export default function AgentCreatePage() {
   return (
-    <AgentCreateClient userData={userData} />
+    <main className="flex min-h-screen flex-col items-center justify-start p-6">
+      <div className="w-full max-w-3xl">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">Create New Agent</h1>
+          <p className="mt-2 text-sm text-gray-500">
+            Configure your AI agent with a name, description, and custom system
+            instructions to shape its behavior.
+          </p>
+        </div>
+        <AgentCreateClient />
+      </div>
+    </main>
   );
 }
