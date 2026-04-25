@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
 
 const BASE_URL = 'https://api.muapi.ai';
 // Threshold for treating the agent_id param as a UUID vs a slug
+// UUIDs are 36 chars (with hyphens), so 20 is a safe cutoff
 const UUID_LENGTH_THRESHOLD = 20;
 
 async function fetchAgentDetails(agentId, apiKey) {
@@ -76,7 +77,10 @@ export default async function AgentPage({ params }) {
   const cookieStore = await cookies();
   const apiKey = cookieStore.get("muapi_key")?.value;
 
-  console.log(`[AgentPage] Loading page for agent: ${agent_id}, hasKey: ${!!apiKey}`);
+  // Only log in dev so we don't spam production logs with agent IDs
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[AgentPage] Loading page for agent: ${agent_id}, hasKey: ${!!apiKey}`);
+  }
 
   const [agentDetails, userData] = await Promise.all([
     fetchAgentDetails(agent_id, apiKey),
