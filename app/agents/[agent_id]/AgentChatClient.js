@@ -21,12 +21,16 @@ const STORAGE_KEY = "muapi_key";
  *
  * Personal note: changed the background from black to a dark gray (#0f0f0f)
  * since pure black felt a bit harsh on my eyes during long sessions.
+ *
+ * Personal note: bumped DEBUG to true temporarily while I'm tracing a weird
+ * issue where agentDetails comes in as null on first load sometimes. Will
+ * flip it back off once I figure out what's going on.
  */
 export default function AgentChatClient({ agentDetails, initialHistory, userData }) {
   const interceptorRef = useRef(null);
 
   // Toggle this to true locally if you need to debug prop values
-  const DEBUG = false;
+  const DEBUG = true;
   if (DEBUG) {
     console.log("[AgentChatClient] Rendering", {
       hasAgentDetails: !!agentDetails,
@@ -86,9 +90,4 @@ export default function AgentChatClient({ agentDetails, initialHistory, userData
       <AiAgent
         initialAgentDetails={agentDetails}
         initialHistory={initialHistory}
-        useUser={useUser}
-        usedIn="muapiapp"
-      />
-    </div>
-  );
-}
+    
