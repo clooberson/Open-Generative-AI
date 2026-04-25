@@ -10,9 +10,10 @@ import AgentChatClient from "./AgentChatClient";
  */
 export async function generateMetadata({ params }) {
   const { agent_id } = await params;
+  // TODO: fetch agent name here so title is more descriptive
+  // For now, at least include the agent_id so tabs are distinguishable
   return {
-    // TODO: fetch agent name here so title is more descriptive
-    title: `Agent Chat — Open Generative AI`,
+    title: `Agent ${agent_id} — Open Generative AI`,
   };
 }
 
