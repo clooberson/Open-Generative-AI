@@ -17,7 +17,8 @@ export default function AgentCreatePage() {
           <h1 className="text-3xl font-bold tracking-tight">Create New Agent</h1>
           <p className="mt-2 text-sm text-gray-500">
             Configure your AI agent with a name, description, and custom system
-            instructions to shape its behavior.
+            instructions to shape its behavior. Tip: the more specific your
+            instructions, the better the agent will perform.
           </p>
         </div>
         <AgentCreateClient />
