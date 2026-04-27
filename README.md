@@ -46,6 +46,6 @@ xattr -cr "/Applications/Open Generative AI.app"
 
 **Step 3** — Right-click the app in `/Applications` → click **Open** → click **Open** again on the dialog
 
-> You only need to do this once. After the first launch, macOS will remember your choice and open the app normally.
+> You only need to do this once. After the first launch, the app opens normally.
 
-> **Note (personal):** On macOS Sequoia 15+, you may also need to go to **System Settings → Privacy & Security** and scroll down to find the blocked app entry, then click **Open Anyway** before Step 3 works.
+> **Note (personal):** On macOS Sequoia 15+, I also had to go to **System Settings → Privacy & Security** and scroll down to manually allow the app after attempting to open it once. If Step 3 doesn't work, try that.
