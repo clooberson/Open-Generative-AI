@@ -36,7 +36,9 @@ export default async function afterPack({ appOutDir, packager }) {
 
     const appPath = path.join(appOutDir, `${packager.appInfo.productName}.app`);
     console.log(`  • ad-hoc signing  path=${appPath}`);
-    // using --options runtime so the signature is a bit more robust on newer macOS versions
-    execSync(`codesign --deep --force --options runtime --sign - "${appPath}"`, { stdio: 'inherit' });
+    // Note: removed --options runtime flag because it was causing issues on my
+    // older macOS 12 machine during local dev builds. Fine to add back for
+    // distribution builds if needed.
+    execSync(`codesign --deep --force --sign - "${appPath}"`, { stdio: 'inherit' });
     console.log(`  • ad-hoc signing complete`);
 }
